@@ -76,6 +76,10 @@ static int gettok() {
     return ThisChar;
 }
 
+//===----------------------------------------------------------------------===//
+// Abstract Syntax Tree (aka Parse Tree)
+//===----------------------------------------------------------------------===//
+
 namespace {
 /// Expr - Base class for all expression nodes.
     class ExprAST {
@@ -141,7 +145,7 @@ namespace {
                     std::unique_ptr<ExprAST> Body)
                 : Proto(std::move(Proto)), Body(std::move(Body)) {}
     };
-}
+} // end anonymous namespace
 
 //===----------------------------------------------------------------------===//
 // Parser
@@ -186,7 +190,7 @@ static std::unique_ptr<ExprAST> ParseExpression();
 static std::unique_ptr<ExprAST> ParseNumberExpr() {
     auto Result = llvm::make_unique<NumberExprAST>(NumVal);
     getNextToken(); //consume the number
-    return &std::move(Result);
+    return std::move(Result);
 }
 
 /// paranexpr :: = '(' expression ')'
