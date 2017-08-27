@@ -223,7 +223,7 @@ static std::unique_ptr<ExprAST> ParseIdentifierExpr() {
     if (CurTok != ')') {
         while (1) {
             if (auto Arg = ParseExpression())
-                Args.push_back(&std::move(Args));
+                Args.push_back(std::move(Arg));
             else
                 return nullptr;
 
