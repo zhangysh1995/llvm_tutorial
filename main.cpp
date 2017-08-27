@@ -248,14 +248,14 @@ static std::unique_ptr<ExprAST> ParseIdentifierExpr() {
 /// ::=parenexpr
 static std::unique_ptr<ExprAST> ParsePrimary() {
     switch (CurTok) {
-        default:
-            return LogError("unknown token when expecting an expression");
         case tok_identifier:
             return ParseIdentifierExpr();
         case tok_number:
             return ParseNumberExpr();
         case '(':
             return ParseParenExpr();
+        default:
+            return LogError("unknown token when expecting an expression");
     }
 }
 
